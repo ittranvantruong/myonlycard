@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserSocialNetworkTable extends Migration
+class CreateLinksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUserSocialNetworkTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_social_network', function (Blueprint $table) {
+        Schema::create('links', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('social_network_id');
@@ -31,6 +31,6 @@ class CreateUserSocialNetworkTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_social_network');
+        Schema::dropIfExists('links');
     }
 }

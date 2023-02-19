@@ -14,7 +14,8 @@ class UserRequest extends Request
     protected function methodPost()
     {
         return [
-            'code_card' => ['required', 'unique:App\Models\User,code_card']
+            'code_card' => ['required', 'unique:App\Models\User,code_card'],
+            'password' => ['required', 'string']
         ];
     }
 

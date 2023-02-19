@@ -10,7 +10,15 @@
                 <h2 class="card-title text-center mb-4">{{ __('Đăng ký') }}</h2>
                 <div class="mb-3">
                     <label class="form-label">{{ __('Email') }}</label>
-                    <x-input-email name="email" :required="true" />
+                    <x-input-email name="email" :value="old('email')" :required="true" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{ __('Họ và tên') }}</label>
+                    <x-input name="fullname" :value="old('fullname')" :required="true" placeholder="Nhập họ và tên"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{ __('Mã sản phẩm') }}</label>
+                    <x-input name="code_card" :value="old('code_card')" :required="true" placeholder="Nhập mã sản phẩm"/>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">{{ __('Mật khẩu') }}</label>
@@ -20,7 +28,7 @@
                     <a href="#">{{ __('Quên mật khẩu?') }}</a>
                 </div>
                 <div class="form-footer">
-                    <button type="submit" class="btn btn-primary w-100">{{ __('Đăng nhập') }}</button>
+                    <button type="submit" class="btn btn-primary w-100">{{ __('Đăng ký') }}</button>
                 </div>
                 </div>
             </x-form>

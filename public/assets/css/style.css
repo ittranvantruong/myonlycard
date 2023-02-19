@@ -1,0 +1,74 @@
+/* info card */
+
+.social-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+.wrap-avatar{
+    width: 190px;
+    height: 190px;
+    margin: 0 auto;
+}
+.wrap-avatar img{
+    object-fit: cover;
+    width: 190px;
+    height: 190px;
+}
+.social-item{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background: white;
+    box-shadow: 3px 4px 2px #e0e0e0, 6px 8px 8px #b0b0b0;
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+}
+.social-item div{
+    flex-basis: 0;
+    flex-grow: 1;
+}
+.social-item .social-name{
+    flex-grow: 5;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #242424;
+}
+a.social-item:hover{
+    text-decoration: none;
+}
+
+.social-item .social-logo{
+    background-color: #f6f6f6;
+    border-radius: 50%;
+}
+.social-item .social-logo img{
+    padding: 10px;
+}
+
+/* drop menu */
+.custom-dropup-menu-arrow.dropdown-menu-arrow:before{
+    top: unset;
+    bottom: -0.25rem;
+    transform: rotate(225deg);
+}
+.dropdown-item.edit img{
+
+}
+.dropdown-item.delete img{
+    
+}
+/* filter image */
+.filter-blue{
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(185deg);
+}
+.filter-orange{
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(342deg);
+}
+
+.filter-red{
+    filter: invert(0.5) sepia(1) saturate(60) hue-rotate(345deg);
+}

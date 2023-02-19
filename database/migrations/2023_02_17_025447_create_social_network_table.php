@@ -57,7 +57,7 @@ class CreateSocialNetworkTable extends Migration
                 'position' => 3
             ],
             [
-                'type' => SocialNetWorkType::BrowerLink,
+                'type' => SocialNetWorkType::Zalo,
                 'name' => 'Zalo',
                 'logo' => '/public/assets/images/socials/zalo.png',
                 'position' => 4

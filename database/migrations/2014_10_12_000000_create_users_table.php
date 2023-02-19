@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('code_card')->unique()->nullable();
+            $table->string('slug')->unique();
             $table->string('fullname')->nullable();
             $table->string('email')->unique()->nullable();
             $table->text('avatar')->nullable();
@@ -24,11 +25,15 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->tinyInteger('status');
+            $table->boolean('publish')->default(true);
             $table->tinyInteger('roles');
+            $table->string('token_get_password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
         DB::table('users')->insert([
+            'code_card' => 'admin'.time(),
+            'slug' => time(),
             'fullname' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456'),

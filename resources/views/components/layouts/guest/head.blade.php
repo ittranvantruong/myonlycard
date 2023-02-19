@@ -9,3 +9,5 @@
 <link href="{{ asset('public/lib/jquery-toast-plugin/jquery.toast.min.css') }}" rel="stylesheet"
     type="text/css">
 <link href="{{ asset('public/lib/Parsley.js-2.9.2/style.css') }}" rel="stylesheet">
+@stack('css-lib')
+@stack('css')

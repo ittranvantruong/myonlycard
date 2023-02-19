@@ -5,8 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserRequest;
 use App\Models\User;
-use App\Enums\UserRole;
-use App\Enums\UserStatus;
+use App\Enums\{UserRole, UserStatus };
 
 class UserController extends Controller
 {
@@ -31,9 +30,11 @@ class UserController extends Controller
     public function store(UserRequest $request){
         $data = $request->validated();
         
+        $data['slug'] = time();
         $data['status'] = UserStatus::Lock;
         $data['roles'] = UserRole::Customer;
-        
+        $data['password'] = bcrypt($data['password']);
+
         $this->model->create($data);
         return back()->with('success', __('Tạo thành công'));
     }

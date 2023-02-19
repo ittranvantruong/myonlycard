@@ -18,7 +18,7 @@
                     <x-input-password name="password" :required="true" />
                 </div>
                 <div class="text-end">
-                    <a href="#">{{ __('Quên mật khẩu?') }}</a>
+                    <a href="{{ route('password.forgot.index') }}">{{ __('Quên mật khẩu?') }}</a>
                 </div>
                 <div class="form-footer">
                     <button type="submit" class="btn btn-primary w-100">{{ __('Đăng nhập') }}</button>

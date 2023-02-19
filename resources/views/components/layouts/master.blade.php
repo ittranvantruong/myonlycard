@@ -6,7 +6,7 @@
 
 </head>
 <body>
-    <div class="wrapper">
+    <div class="page">
         <x-layouts.header />
         {{ $slot }}
         <x-layouts.footer />

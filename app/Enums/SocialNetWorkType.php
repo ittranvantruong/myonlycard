@@ -14,4 +14,5 @@ final class SocialNetWorkType extends Enum
     const BrowerLink = 1;
     const Phone = 2;
     const Email = 3;
+    const Zalo = 4;
 }

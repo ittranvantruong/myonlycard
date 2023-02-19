@@ -5,7 +5,7 @@
     <x-layouts.guest.head />
 
 </head>
-<body class="border-top-wide border-primary d-flex flex-column">
+<body class="border-top-wide d-flex flex-column">
 
     {{ $slot }}
     

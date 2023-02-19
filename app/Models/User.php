@@ -21,13 +21,16 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'code_card',
+        'slug',
         'fullname',
         'email',
         'avatar',
         'description',
         'status',
         'roles',
+        'publish',
         'password',
+        'token_get_password'
     ];
 
     /**
@@ -52,10 +55,29 @@ class User extends Authenticatable
     ];
 
     public function getAuth(){
-        return auth()->user()->load('userSocialNetwork.socicalNetwork');
+        return auth()->user()->load(['links' => function($query){
+            $query->with('socialNetwork');
+            $query->orderBy('position', 'ASC');
+        }]);
     }
 
-    public function userSocialNetwork(){
-        return $this->hasMany(UserSocialNetwork::class, 'user_id');
+    public function links(){
+        return $this->hasMany(Link::class, 'user_id');
     }
+    public function isUserManager(){
+        return $this->roles->value == UserRole::UserManager;
+    }
+
+    public static function findByCodeCard($codeCard){
+        return static::where('code_card', $codeCard)->first();
+    }
+
+    public static function findByKey($key, $value){
+        return static::where($key, $value)->first();
+    }
+
+    public static function share($slug){
+        return static::where('slug', $slug)->where('publish', true)->with('links.socialNetwork')->firstOrFail();
+    }
+
 }

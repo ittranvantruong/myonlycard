@@ -1,0 +1,1 @@
+<option {{ $isSelected($option) }} value="{{ $value }}" {{ $attributes }}>{{ $slot }}</option>

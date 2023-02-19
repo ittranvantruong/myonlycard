@@ -34,9 +34,6 @@ class LoginController extends Controller
         
         if(Auth::attempt($data, true)){
             $request->session()->regenerate();
-            if(auth()->user()->roles->value == UserRole::UserManager){
-                return redirect()->route($this->route['userCreate']);
-            }
             return redirect()->intended(route('home'));
         }
         return back()->with('error', __('Tên đăng nhập hoặc mật khẩu không đúng'));
