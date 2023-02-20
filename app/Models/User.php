@@ -55,10 +55,13 @@ class User extends Authenticatable
     ];
 
     public function getAuth(){
-        return auth()->user()->load(['links' => function($query){
-            $query->with('socialNetwork');
-            $query->orderBy('position', 'ASC');
-        }]);
+        return auth()->user()->load([
+            'links' => function($query){
+                $query->with('socialNetwork');
+                $query->orderBy('position', 'ASC');
+            },
+            'personalize'
+        ]);
     }
 
     public function links(){
@@ -79,5 +82,7 @@ class User extends Authenticatable
     public static function share($slug){
         return static::where('slug', $slug)->where('publish', true)->with('links.socialNetwork')->firstOrFail();
     }
-
+    public function personalize(){
+        return $this->hasOne(Personalize::class, 'user_id');
+    }
 }

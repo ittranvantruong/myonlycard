@@ -28,12 +28,12 @@ class ProfileController extends Controller
 
     public function show(){
         $auth = $this->model->getAuth();
+        
         return view($this->view['show'], compact('auth'))->render();
     }
 
     public function edit(){
         $auth = $this->model->getAuth();
-        // dd($auth);
         return view($this->view['edit'], compact('auth'));
     }
 
