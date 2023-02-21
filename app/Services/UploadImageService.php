@@ -3,7 +3,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class ProfileService
+class UploadImageService
 {
     private $disk = 'uploads';
     

@@ -5,6 +5,7 @@ return [
     'images' => [
         'logo' => '',
         'favicon' => '',
-        'avatar_default' => '/public/assets/images/avatar/avatar-user.png'
+        'avatar_default' => '/public/assets/images/avatar/avatar-user.png',
+        'image_default' => '/public/assets/images/default-image.png'
     ]
 ];

@@ -1,4 +1,3 @@
-
 <x-form id="formCreateLink" :action="route('link.store')" type="post" enctype="multipart/form-data" :validate="true">
     <div class="modal-header">
         <h5 class="modal-title">{{ __('Tạo link mới') }}</h5>
@@ -7,17 +6,17 @@
     <div class="modal-body">
         <div class="mb-3">
             <label class="form-label">{{ __('Chọn loại') }}</label>
-            <x-select name="social_network_id" class="form-control" :required="true">
-                @foreach($socialNetwork as $item)
-                    <x-option :value="$item->id">
+            <x-select id="selectTypeLink" name="social_network_id" class="form-select" :required="true">
+                @foreach ($socialNetwork as $item)
+                    <x-option :value="$item->id"
+                        data-custom-properties="&lt;span class=&quot;avatar avatar-xs&quot; style=&quot;background-image: url({{ asset($item->logo) }})&quot;&gt;&lt;/span&gt;">
                         <span>{{ $item->name }}</span>
                     </x-option>
                 @endforeach
             </x-select>
         </div>
-        <div class="mb-3">
-            <label class="form-label">{{ __('Đường link') }}</label>
-            <x-input name="plain_value" :required="true" :placeholder="__('Vui lòng nhập đường link')"/>
+        <div id="inputRender">
+            @include('links.form.create_'.\Str::snake($socialNetwork[0]->type->key), ['socialNetwork' => $socialNetwork[0]])
         </div>
     </div>
     <div class="modal-footer">
@@ -25,6 +24,3 @@
         <button type="submit" class="btn btn-primary">{{ __('Tạo link') }}</button>
     </div>
 </x-form>
-<script>
-$('form').parsley();
-</script>

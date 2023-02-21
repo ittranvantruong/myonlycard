@@ -26,6 +26,3 @@
         <button type="submit" class="btn btn-primary">{{ __('Sửa link') }}</button>
     </div>
 </x-form>
-<script>
-$('form').parsley();
-</script>

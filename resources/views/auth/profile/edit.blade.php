@@ -49,7 +49,20 @@
     .action.dropup{
         cursor: pointer;
     }
+    /* preview img */
+    #previewBg{
+        position: relative;
+    }
+    #clearImagePreview{
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        cursor: pointer;
+    }
 </style>
+@endpush
+@push('js-lib')
+<script src="{{ asset('public/lib/Tabler/lib/tom-select/dist/js/tom-select.base.min.js') }}"></script>
 @endpush
 @push('js')
 <script src="{{ asset('public/lib/jquery-ui/jquery-ui.js') }}"></script>

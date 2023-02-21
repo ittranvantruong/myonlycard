@@ -4,13 +4,16 @@
     <link href="{{ asset('public/assets/css/style.css') }}" rel="stylesheet">
 @endpush
 <x-layouts.guest.master>
-    <div class="page-wrapper">
+    <div class="page-wrapper bg-personalize" 
+        style="background-color: {{ optional($user->personalize)->background_color }}; 
+        background-image: url({{ asset(optional($user->personalize)->background_image_url) }});">
         <div class="page-body">
             <div class="container-xl">
                 @include('partials.block-avatar', [
                     'avatar' => $user->avatar,
                     'fullname' => $user->fullname,
                     'description' => $user->description,
+                    'personalize' => $user->personalize
                 ])
                 <div class="row row-deck row-cards justify-content-center">
                     <div class="col-12 col-md-4">

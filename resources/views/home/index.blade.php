@@ -1,12 +1,15 @@
 @section('title', config('custom.site_name'))
 <x-layouts.master>
-    <div class="page-wrapper">
+    <div class="page-wrapper bg-personalize" 
+        style="background-color: {{ optional($auth->personalize)->background_color }}; 
+        background-image: url({{ asset(optional($auth->personalize)->background_image_url) }});">
         <div class="page-body">
             <div class="container-xl">
                 @include('partials.block-avatar', [
                     'avatar' => $auth->avatar,
                     'fullname' => $auth->fullname,
                     'description' => $auth->description,
+                    'personalize' => $auth->personalize
                 ])
                 <div class="row mb-3">
                     <div class="col text-center">

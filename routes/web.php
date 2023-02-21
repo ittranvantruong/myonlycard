@@ -47,21 +47,33 @@ Route::controller(App\Http\Controllers\Auth\ForgotPasswordController::class)
     Route::put('/update', 'update')->name('update');
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware(['auth'])->group(function(){
     //home
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // link
+    Route::controller(App\Http\Controllers\Personalize\PersonalizeController::class)
+    ->prefix('/personalize')
+    ->as('personalize.')
+    ->group(function(){
+        Route::put('/update', 'update')->name('update');
+    });
 
     // link
     Route::controller(App\Http\Controllers\Link\LinkController::class)
     ->prefix('/link')
     ->as('link.')
     ->group(function(){
-        Route::get('/create', 'create')->name('create');
-        Route::get('/edit/{id}', 'edit')->name('edit');
-        Route::post('/store', 'store')->name('store');
-        Route::put('/update', 'update')->name('update');
-        Route::put('/reorder', 'reorder')->name('reorder');
-        Route::delete('/delete/{id}', 'delete')->name('delete');
+        Route::controller(App\Http\Controllers\Link\LinkController::class)
+        ->group(function(){
+            Route::get('/create', 'create')->name('create');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/store', 'store')->name('store');
+            Route::put('/update', 'update')->name('update');
+            Route::put('/reorder', 'reorder')->name('reorder');
+            Route::delete('/delete/{id}', 'delete')->name('delete');
+        });
+        
+        Route::get('/render-input/{social_network_id?}', [App\Http\Controllers\Link\RenderInputController::class, 'show'])->name('render_input.show');
     });
 
     // profile

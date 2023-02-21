@@ -1,17 +1,24 @@
 <div class="card">
     <div class="card-header">
-      <ul class="nav nav-pills card-header-pills">
-        <li class="nav-item">
-          <a href="#tabOne" class="nav-link active fw-bold" data-bs-toggle="tab" aria-selected="true" role="tab">
-            {{ __('Thông tin') }}
-          </a>
-        </li>
-        <li class="nav-item">
-            <a href="#tabTwo" class="nav-link fw-bold" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
-                {{ __('Quản lý link') }}
-            </a>
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a href="#tabOne" class="nav-link active fw-bold" data-bs-toggle="tab" aria-selected="true" role="tab">
+                    {{ __('Thông tin') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#tabTwo" class="nav-link fw-bold" data-bs-toggle="tab" aria-selected="false" tabindex="-1"
+                    role="tab">
+                    {{ __('Quản lý link') }}
+                </a>
+            </li>
+            <li class="nav-item">
+              <a href="#tabThree" class="nav-link fw-bold" data-bs-toggle="tab" aria-selected="false" tabindex="-1"
+                  role="tab">
+                  {{ __('Cá nhân hóa') }}
+              </a>
           </li>
-      </ul>
+        </ul>
     </div>
     <div class="card-body">
         <div class="tab-content">
@@ -21,9 +28,14 @@
             </div>
             <!-- Content of card #2 -->
             <div id="tabTwo" class="tab-pane" role="tabpanel">
-              <h1 class="text-center mb-4">{{ __('Thêm đường link vào tài khoản') }}</h1>
+                <h1 class="text-center mb-4">{{ __('Thêm đường link vào tài khoản') }}</h1>
                 @include('auth.profile.form.update-link', ['auth' => $auth])
             </div>
+            <!-- Content of card #2 -->
+            <div id="tabThree" class="tab-pane" role="tabpanel">
+              <h1 class="text-center mb-4">{{ __('Thêm đường link vào tài khoản') }}</h1>
+              @include('auth.profile.form.personalize', ['personalize' => $auth->personalize])
+          </div>
         </div>
     </div>
 </div>

@@ -1,57 +1,12 @@
 <x-input type="hidden" name="route_create_link" :value="route('link.create')"/>
 <x-input type="hidden" name="route_show" :value="route('profile.show')"/>
+<x-input type="hidden" name="route_render_input_link" :value="route('link.render_input.show')"/>
 <script>
     var modalId = 'modalOpen', 
     btnOpenModal = $('#btnOpenModal'), 
     modalContent = $('#modalOpen .modal-content'), 
     editReplace;
-function copyText(text){
-    var input = $('<input>').val(text);
-    $('body').append(input);
-    input.select();
-    document.execCommand('copy');
-    input.remove();
-}
-function previewImage(file, show){
-    if (file.files && file.files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function (e) {
-            show.attr('src', e.target.result);
-        }
-        reader.readAsDataURL(file.files[0]); // convert to base64 string
-    }
-}
-function handleAjaxError(errors){
-    if(errors.status == 416){
-        $.map(errors.errors, function(value) {
-            value.forEach(element => {
-                msgError(element);
-            })
-        })
-    }else{
-        msgError('Vui lòng tải lại trang');
-    }
-    
-}
-function msgSuccess(text){
-    $.toast({
-        heading: 'Thành công',
-        text: text,
-        position: 'top-right',
-        icon: 'success', 
-        hideAfter: 10000
-    });
-}
-function msgError(text){
-    $.toast({
-        heading: 'Thất bại',
-        text: text,
-        position: 'top-right',
-        icon: 'error', 
-        hideAfter: 10000
-    });
-}
 function callAjaxShow(){
     var url = $('input[name="route_show"]').val(), render = $("#viewDemoProfile .preview-profile");
     $.ajax({
@@ -81,8 +36,27 @@ $('.copy-text').click(function() {
     var text = $('.link-brower').text();
     copyText(text);
     $(this).find('span').text('Đã copy');
-  });
+});
 
+// render input của từng loại link
+
+$(document).on('change', '#selectTypeLink', function(e){
+    var that = $(this), url = $('input[name="route_render_input_link"]').val();
+    
+    $.ajax({
+        type: "GET",
+        url: url + '/' + that.val(),
+        success: function (response) {
+            $("#inputRender").html(response);
+        },
+        error: function(response){
+            handleAjaxError(response.responseJSON);
+        }
+    });
+});
+
+
+// Tạo và render form links tạo
 $(document).on('click', '#btnCreateLink', function(e){
     var url = $('input[name="route_create_link"]').val();
     $.ajax({
@@ -90,6 +64,8 @@ $(document).on('click', '#btnCreateLink', function(e){
         url: url,
         success: function (response) {
             modalContent.html(response);
+            beautySelectImage("selectTypeLink");
+            $('form').parsley();
             btnOpenModal.click();
         },
         error: function(response){
@@ -122,29 +98,12 @@ $(document).on('submit', '#formCreateLink', function(e){
     e.preventDefault();
     var form = $(this), render = $("#listLink");
     callAjaxCreateLink(form, render);
+    
 });
+// Tạo và render form links tạo-----------
 
-$(document).on('click', '.edit-link', function(e){
-    e.preventDefault();
-    var that = $(this), url = that.data('route');
-    $.ajax({
-        type: "GET",
-        url: url,
-        success: function (response) {
-            modalContent.html(response);
-            btnOpenModal.click();
-            editReplace = that.parents('.item-link');
-        },
-        error: function(response){
-            handleAjaxError(response.responseJSON);
-        }
-    });
-});
 
-$(document).on('click', '.ui-sortable-handle .social-item', function(e){
-    e.preventDefault();
-})
-
+// Cập nhật và render form links sửa
 function callAjaxUpdateLink(form){
     $.ajax({
         type: "PUT",
@@ -166,11 +125,33 @@ function callAjaxUpdateLink(form){
         }
     })
 }
+$(document).on('click', '.edit-link', function(e){
+    e.preventDefault();
+    var that = $(this), url = that.data('route');
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function (response) {
+            modalContent.html(response);
+            btnOpenModal.click();
+            beautySelectImage("selectTypeLink");
+            $('form').parsley();
+            editReplace = that.parents('.item-link');
+        },
+        error: function(response){
+            handleAjaxError(response.responseJSON);
+        }
+    });
+});
+
 $(document).on('submit', '#formUpdateLink', function(e){
     e.preventDefault();
     var form = $(this);
     callAjaxUpdateLink(form);
 });
+// Cập nhật và render form links sửa -----
+
+// Xóa link
 $(document).on('click', '.delete-link', function(e){
     e.preventDefault();
     var that = $(this), url = that.data('route');
@@ -206,13 +187,34 @@ function callAjaxReorderLink(form){
         }
     })
 }
+//Sắp xếp link
+$(document).on('click', '.ui-sortable-handle .social-item', function(e){
+    e.preventDefault();
+})
 $(document).on('submit', '#formReorderLink', function(e){
     e.preventDefault();
     var form = $(this);
     callAjaxReorderLink(form);
 });
+//Sắp xếp link ---------
+
+
+// preview file
+$(document).on('change', '.file-change-preview', function(e){
+    var preview = $(this).data('preview');
+    previewImage(this, $(preview));
+});
 
 $(document).ready(function(){
+
+    // delete file preview
+    $("#clearImagePreview").click(function(e){
+        var preview = $(this).data('preview'), input = $(this).data('input');
+        $(preview).attr('src', domain + '/public/assets/images/default-image.png');
+        $(input).val('');
+    })
+
+    //reorder links
   $('div.reorder-link-list').mousedown(function() {
     // set fixed height to prevent scroll jump
     // when dragging from bottom

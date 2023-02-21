@@ -5,14 +5,15 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static BrowerLink()
- * @method static static Phone()
- * @method static static Email()
+ * @method static static Simple()
+ * @method static static Custom()
+ * @method static static AccountBank()
+ * @method static static Text()
  */
 final class SocialNetWorkType extends Enum
 {
-    const BrowerLink = 1;
-    const Phone = 2;
-    const Email = 3;
-    const Zalo = 4;
+    const Simple = 1;
+    const Custom = 2;
+    const AccountBank = 3;
+    const Text = 4;
 }

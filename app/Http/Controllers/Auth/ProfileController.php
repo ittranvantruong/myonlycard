@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ProfileRequest;
 use App\Models\User;
-use App\Services\ProfileService;
+use App\Services\UploadImageService;
 
 class ProfileController extends Controller
 {
     //
     public $model;
     public $service;
-    public function __construct(ProfileService $service)
+    public function __construct(UploadImageService $service)
     {
         parent::__construct();
         $this->model = new User;
