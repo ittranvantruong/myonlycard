@@ -3,7 +3,7 @@
         <x-form id="formReorderLink" :action="route('link.reorder')" type="put" enctype="multipart/form-data" :validate="true">
             <div id="listLink" class="d-flex social-wrap reorder-link-list">
                 @foreach($auth->links as $link)
-                    @include('auth.profile.link', ['link' => $link])
+                    @include('links.item-edit', ['link' => $link])
                 @endforeach
             </div>
             <div class="text-center mt-4">

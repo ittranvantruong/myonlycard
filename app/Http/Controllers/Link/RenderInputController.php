@@ -15,10 +15,15 @@ class RenderInputController extends Controller
         parent::__construct();
         $this->modelSocialNetwork = new SocialNetwork;
     }
+    public function getView()
+    {
+        return [
+            'input' => 'links.form.'
+        ];
+    }
     public function show($social_network_id = null){
         $socialNetwork = $this->modelSocialNetwork->findOrFail($social_network_id);
-        
-        return view('links.form.create_'.\Str::snake($socialNetwork->type->key), compact('socialNetwork'))->render();
+        return view($this->view['input'].\Str::snake($socialNetwork->type->key), compact('socialNetwork'))->render();
     }
 
 }

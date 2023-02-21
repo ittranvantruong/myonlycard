@@ -4,10 +4,11 @@ namespace App\Http\Requests\Link;
 
 use App\Enums\SocialNetWorkType;
 use App\Http\Requests\Request;
+use BenSampo\Enum\Rules\EnumValue;
 
 class LinkRequest extends Request
 {
-    private $validate = [];
+    protected $validate = [];
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,16 +17,18 @@ class LinkRequest extends Request
     protected function methodPost()
     {
         $this->validate['social_network_id'] = ['required', 'exists:App\Models\SocialNetwork,id'];
-        $this->validate['plain_value'] = ['required'];
+        $this->validate['type_social_network_id'] = ['required', new EnumValue(SocialNetWorkType::class, false)];
 
-        if($this->input('social_network_id') == SocialNetWorkType::Text){
+        if($this->input('type_social_network_id') == SocialNetWorkType::Simple){
+            $this->validate['plain_value.value_any'] = ['required'];
+        }elseif($this->input('type_social_network_id') == SocialNetWorkType::Text){
             $this->validate['plain_value.title'] = ['required', 'string'];
             $this->validate['plain_value.content'] = ['required'];
-        }elseif($this->input('social_network_id') == SocialNetWorkType::Custom){
+        }elseif($this->input('type_social_network_id') == SocialNetWorkType::Custom){
             $this->validate['plain_value.title'] = ['required', 'string'];
             $this->validate['plain_value.url'] = ['required', 'url'];
             $this->validate['plain_value.icon_url'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'];
-        }elseif($this->input('social_network_id') == SocialNetWorkType::AccountBank){
+        }elseif($this->input('type_social_network_id') == SocialNetWorkType::AccountBank){
             $this->validate['plain_value.bank_name'] = ['required', 'string'];
             $this->validate['plain_value.account_name'] = ['required', 'string'];
             $this->validate['plain_value.account_number'] = ['required', 'string'];
@@ -36,15 +39,28 @@ class LinkRequest extends Request
     protected function methodPut()
     {
         if($this->routeIs('link.reorder')){
-            return [
-                'id.*' => ['required', 'exists:App\Models\Link,id']
-            ];
+            $this->validate['id.*'] = ['required', 'exists:App\Models\Link,id'];
+        }else{
+            $this->validate['id'] = ['required', 'exists:App\Models\Link,id'];
+            $this->validate['social_network_id'] = ['required', 'exists:App\Models\SocialNetwork,id'];
+            $this->validate['type_social_network_id'] = ['required', new EnumValue(SocialNetWorkType::class, false)];
+
+            if($this->input('type_social_network_id') == SocialNetWorkType::Simple){
+                $this->validate['plain_value.value_any'] = ['required'];
+            }elseif($this->input('type_social_network_id') == SocialNetWorkType::Text){
+                $this->validate['plain_value.title'] = ['required', 'string'];
+                $this->validate['plain_value.content'] = ['required'];
+            }elseif($this->input('type_social_network_id') == SocialNetWorkType::Custom){
+                $this->validate['plain_value.title'] = ['required', 'string'];
+                $this->validate['plain_value.url'] = ['required', 'url'];
+                $this->validate['plain_value.icon_url'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'];
+            }elseif($this->input('type_social_network_id') == SocialNetWorkType::AccountBank){
+                $this->validate['plain_value.bank_name'] = ['required', 'string'];
+                $this->validate['plain_value.account_name'] = ['required', 'string'];
+                $this->validate['plain_value.account_number'] = ['required', 'string'];
+            }
         }
-        return [
-            'id' => ['required', 'exists:App\Models\Link,id'],
-            'social_network_id' => ['required', 'exists:App\Models\SocialNetwork,id'],
-            'plain_value' => ['required']
-        ];
+        return $this->validate;
     }
     public function methodDelete(){
         return [

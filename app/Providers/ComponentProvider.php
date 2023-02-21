@@ -33,6 +33,7 @@ class ComponentProvider extends ServiceProvider
         Blade::component('input-password', \App\View\Components\Input\InputPassword::class);
         Blade::component('select', \App\View\Components\Select\Select::class);
         Blade::component('option', \App\View\Components\Select\Option::class);
-        Blade::component('card-link', \App\View\Components\CardLink::class);
+        Blade::component('link-show', \App\View\Components\Link\LinkShow::class);
+        Blade::component('link-edit', \App\View\Components\Link\LinkEdit::class);
     }
 }

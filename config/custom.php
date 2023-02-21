@@ -6,6 +6,7 @@ return [
         'logo' => '',
         'favicon' => '',
         'avatar_default' => '/public/assets/images/avatar/avatar-user.png',
-        'image_default' => '/public/assets/images/default-image.png'
+        'image_default' => '/public/assets/images/default-image.png',
+        'icon_share' => '/public/assets/images/socials/link.png',
     ]
 ];

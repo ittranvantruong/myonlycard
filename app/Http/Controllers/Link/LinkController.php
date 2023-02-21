@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Link;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Link\LinkRequest;
 use App\Models\{SocialNetwork, Link};
+use App\Services\UploadImageService;
 
 class LinkController extends Controller
 {
@@ -12,11 +13,12 @@ class LinkController extends Controller
 
     public $model;
     public $modelSocialNetwork;
-    public function __construct()
+    public function __construct(UploadImageService $service)
     {
         parent::__construct();
         $this->model = new Link;
         $this->modelSocialNetwork = new SocialNetwork;
+        $this->service = $service;
     }
 
     public function getView()
@@ -24,7 +26,7 @@ class LinkController extends Controller
         return [
             'create' => 'auth.profile.modals.create-link',
             'edit' => 'auth.profile.modals.edit-link',
-            'link' => 'auth.profile.link'
+            'link' => 'links.item-edit'
         ];
     }
     public function create(){
@@ -44,6 +46,12 @@ class LinkController extends Controller
         $data = $request->validated();
         $data['user_id'] = auth()->user()->id;
         $data['position'] = 0;
+        if ($request->hasFile('plain_value.icon_url')) {
+            $data['plain_value']['icon_url'] = $this->service
+            ->uploadAvatar($request->file('plain_value.icon_url'))
+            ->getInstance();
+        }
+        unset($data['type_social_network_id']);
         $link = $this->model->create($data)->load(['socialNetwork']);
         return view($this->view['link'], compact('link'))->render();
 
@@ -57,6 +65,13 @@ class LinkController extends Controller
         
         $this->authorize('update', $link);
 
+        if ($request->hasFile('plain_value.icon_url')) {
+            $data['plain_value']['icon_url'] = $this->service
+            ->uploadAvatar($request->file('plain_value.icon_url'))
+            ->deleleFile($link->plain_value['icon_url'] ?? '')
+            ->getInstance();
+        }
+        unset($data['type_social_network_id']);
         $link->update($data);
         $link = $link->load(['socialNetwork']);
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,10 @@ class Link extends Model
     protected $table = 'links';
 
     protected $guarded = [];
+
+    protected $casts = [
+        'plain_value' => AsArrayObject::class
+    ];
 
     public function socialNetwork(){
         return $this->belongsTo(SocialNetwork::class, 'social_network_id');

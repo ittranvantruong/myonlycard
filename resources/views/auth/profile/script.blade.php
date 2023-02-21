@@ -56,7 +56,7 @@ $(document).on('change', '#selectTypeLink', function(e){
 });
 
 
-// Tạo và render form links tạo
+// Tạo và render form links
 $(document).on('click', '#btnCreateLink', function(e){
     var url = $('input[name="route_create_link"]').val();
     $.ajax({
@@ -74,15 +74,18 @@ $(document).on('click', '#btnCreateLink', function(e){
     });
 });
 function callAjaxCreateLink(form, render){
+    var formData = new FormData(form), elm = $(form);
     $.ajax({
         type: "POST",
-        url: form.attr('action'),
-        data: form.serialize(),
+        url: elm.attr('action'),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function(response){
             render.prepend(response);
             closeModal(modalId)
-            form.parsley().reset();
-            form.trigger("reset");
+            elm.parsley().reset();
+            elm.trigger("reset");
             msgSuccess('Thực hiện thành công');
             callAjaxShow();
         },
@@ -90,14 +93,14 @@ function callAjaxCreateLink(form, render){
             handleAjaxError(response.responseJSON);
         },
         complete: function(response){
-            endAjaxForm(form, 'Tạo link')
+            endAjaxForm(elm, 'Tạo link')
         }
     })
 }
 $(document).on('submit', '#formCreateLink', function(e){
     e.preventDefault();
-    var form = $(this), render = $("#listLink");
-    callAjaxCreateLink(form, render);
+    var render = $("#listLink");
+    callAjaxCreateLink(this, render);
     
 });
 // Tạo và render form links tạo-----------
@@ -105,15 +108,21 @@ $(document).on('submit', '#formCreateLink', function(e){
 
 // Cập nhật và render form links sửa
 function callAjaxUpdateLink(form){
+    var formData = new FormData(form), elm = $(form);
     $.ajax({
-        type: "PUT",
-        url: form.attr('action'),
-        data: form.serialize(),
+        type: "POST",
+        headers: {
+            "X-HTTP-Method-Override": "PUT"
+        },
+        url: elm.attr('action'),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function(response){
             editReplace.html(response);
             closeModal(modalId);
-            form.parsley().reset();
-            form.trigger("reset");
+            elm.parsley().reset();
+            elm.trigger("reset");
             msgSuccess('Thực hiện thành công');
             callAjaxShow();
         },
@@ -121,7 +130,7 @@ function callAjaxUpdateLink(form){
             handleAjaxError(response.responseJSON);
         },
         complete: function(response){
-            endAjaxForm(form, 'Sửa link')
+            endAjaxForm(elm, 'Sửa link')
         }
     })
 }
@@ -146,8 +155,7 @@ $(document).on('click', '.edit-link', function(e){
 
 $(document).on('submit', '#formUpdateLink', function(e){
     e.preventDefault();
-    var form = $(this);
-    callAjaxUpdateLink(form);
+    callAjaxUpdateLink(this);
 });
 // Cập nhật và render form links sửa -----
 

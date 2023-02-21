@@ -16,7 +16,7 @@
             </x-select>
         </div>
         <div id="inputRender">
-            @include('links.form.create_'.\Str::snake($socialNetwork[0]->type->key), ['socialNetwork' => $socialNetwork[0]])
+            @include('links.form.'.\Str::snake($socialNetwork[0]->type->key), ['socialNetwork' => $socialNetwork[0]])
         </div>
     </div>
     <div class="modal-footer">
