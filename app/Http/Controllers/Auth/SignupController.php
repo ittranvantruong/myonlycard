@@ -31,6 +31,7 @@ class SignupController extends Controller
         $data['status'] = UserStatus::Active;
         $data['password'] = bcrypt($data['password']);
         $user->update($data);
+        
         return redirect()->route('login')->with('success', __('Bạn đã đăng ký thành công'));
     }
 

@@ -18,6 +18,7 @@
                 @if(auth()->user()->isUserManager())
                   <a href="{{ route('user.create') }}" class="dropdown-item">{{ __('Tạo mã sản phẩm') }}</a>
                 @endif
+                <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('Chỉnh thông tin') }}</a>
                 <a href="{{ route('password.change.index') }}" class="dropdown-item">{{ __('Đổi mật khẩu') }}</a>
                 <a href="{{ route('logout') }}" class="dropdown-item">{{ __('Đăng xuất') }}</a>
               </div>

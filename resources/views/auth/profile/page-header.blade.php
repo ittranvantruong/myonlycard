@@ -7,7 +7,7 @@
                     <span class="link-brower text-primary">{{ route('share.show', $auth->slug) }}</span>
                 </div>
                 <div class="">
-                    <button type="button" class="btn btn-sm copy-text btn-outline-secondary">
+                    <button type="button" class="btn btn-sm copy-text btn-outline-secondary" data-target=".link-brower">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>

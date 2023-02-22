@@ -80,3 +80,52 @@ a.social-item:hover{
 .filter-red{
     filter: invert(0.5) sepia(1) saturate(60) hue-rotate(345deg);
 }
+/* animation */
+.flipInX{
+    -webkit-animation-name: flipInX;
+    animation-name: flipInX;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+}
+@keyframes flipInX{
+    from{
+        opacity:0;
+        -webkit-transform:perspective(400px) rotateX(90deg) scale3d(1.2,1.2,1.2);
+        transform:perspective(400px) rotateX(90deg) scale3d(1.2,1.2,1.2)
+    }
+    50%{
+        opacity:1;
+        -webkit-animation-timing-function:cubic-bezier(0.455,0.03,0.515,0.955);
+        animation-timing-function:cubic-bezier(0.455,0.03,0.515,0.955);
+        -webkit-transform:perspective(400px) rotateX(-20deg) scale3d(1,1,1);
+        transform:perspective(400px) rotateX(-20deg) scale3d(1,1,1);
+    }
+    to{
+        -webkit-transform:perspective(400px) rotateX(0deg) scale3d(1,1,1);
+        transform:perspective(400px) rotateX(0deg) scale3d(1,1,1);
+    }
+
+}
+.flipOutX{
+    -webkit-animation-name:flipOutX;
+    animation-name:flipOutX;
+    -webkit-animation-duration: .6s;
+    animation-duration: .6s;
+}
+@keyframes flipOutX{
+    from{
+        -webkit-transform:perspective(400px) rotateX(0deg) scale3d(1,1,1);
+        transform:perspective(400px) rotateX(0deg) scale3d(1,1,1);
+    }
+    60%{
+        opacity:1;
+        -webkit-animation-timing-function:cubic-bezier(0.455,0.03,0.515,0.955);
+        animation-timing-function:cubic-bezier(0.455,0.03,0.515,0.955);
+        -webkit-transform:perspective(400px) rotateX(-30deg) scale3d(1,1,1);
+        transform:perspective(400px) rotateX(-30deg) scale3d(1,1,1);
+    }
+    to{
+        opacity:0;-webkit-transform:perspective(400px) rotateX(90deg) scale3d(1.2,1.2,1.2);
+        transform:perspective(400px) rotateX(90deg) scale3d(1.2,1.2,1.2);
+    }
+}

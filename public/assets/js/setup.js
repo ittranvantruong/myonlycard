@@ -88,3 +88,17 @@ function copyText(text){
     document.execCommand('copy');
     input.remove();
 }
+
+$(document).on('click', '.collapse-item-link', function(e) {
+    e.preventDefault();
+    var element = $(this).attr('href');
+    if ($(element).hasClass("flipInX")) {
+        $(element).removeClass("flipInX").addClass("flipOutX");
+        setTimeout(function() {
+          $(element).addClass("d-none");
+        }, 600);
+
+      } else {
+        $(element).removeClass("flipOutX d-none").addClass("flipInX");
+      }
+});

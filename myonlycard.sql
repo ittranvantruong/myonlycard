@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 19, 2023 lúc 09:49 AM
--- Phiên bản máy phục vụ: 10.4.24-MariaDB
--- Phiên bản PHP: 8.1.6
+-- Thời gian đã tạo: Th2 22, 2023 lúc 07:52 AM
+-- Phiên bản máy phục vụ: 10.4.14-MariaDB
+-- Phiên bản PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -75,7 +75,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2023_02_17_025447_create_social_network_table', 1),
-(6, '2023_02_18_180616_create_links_table', 1);
+(6, '2023_02_18_180616_create_links_table', 1),
+(7, '2023_02_20_221048_create_personalize_table', 1);
 
 -- --------------------------------------------------------
 
@@ -88,6 +89,29 @@ CREATE TABLE `password_resets` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `personalize`
+--
+
+CREATE TABLE `personalize` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `background_color` char(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#FFFFFF',
+  `background_image_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_color` char(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#000000',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `personalize`
+--
+
+INSERT INTO `personalize` (`id`, `user_id`, `background_color`, `background_image_url`, `name_color`, `created_at`, `updated_at`) VALUES
+(1, 1, '#FFFFFF', NULL, '#000000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -118,6 +142,7 @@ CREATE TABLE `social_network` (
   `type` tinyint(4) NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `logo` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prefix_link` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `position` tinyint(4) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -127,15 +152,31 @@ CREATE TABLE `social_network` (
 -- Đang đổ dữ liệu cho bảng `social_network`
 --
 
-INSERT INTO `social_network` (`id`, `type`, `name`, `logo`, `position`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Số điện thoại', '/public/assets/images/socials/phone.png', 1, NULL, NULL),
-(2, 3, 'Email', '/public/assets/images/socials/gmail.png', 2, NULL, NULL),
-(3, 1, 'Facebook', '/public/assets/images/socials/facebook.png', 3, NULL, NULL),
-(4, 4, 'Zalo', '/public/assets/images/socials/zalo.png', 4, NULL, NULL),
-(5, 1, 'Tiktok', '/public/assets/images/socials/tik-tok.png', 5, NULL, NULL),
-(6, 1, 'Instagram', '/public/assets/images/socials/instagram.png', 6, NULL, NULL),
-(7, 1, 'Twitter', '/public/assets/images/socials/twitter.png', 7, NULL, NULL),
-(8, 1, 'Youtube', '/public/assets/images/socials/youtube.png', 8, NULL, NULL);
+INSERT INTO `social_network` (`id`, `type`, `name`, `logo`, `prefix_link`, `position`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Số điện thoại', '/public/assets/images/socials/phone.png', 'tel:', 1, NULL, NULL),
+(2, 1, 'Email', '/public/assets/images/socials/gmail.png', 'mailto:', 2, NULL, NULL),
+(3, 4, 'Văn bản', '/public/assets/images/socials/text.png', NULL, 3, NULL, NULL),
+(4, 1, 'Facebook', '/public/assets/images/socials/facebook.png', NULL, 4, NULL, NULL),
+(5, 1, 'Instagram', '/public/assets/images/socials/instagram.png', NULL, 5, NULL, NULL),
+(6, 1, 'Twitter', '/public/assets/images/socials/twitter.png', NULL, 6, NULL, NULL),
+(7, 1, 'Pinterest', '/public/assets/images/socials/pinterest.png', NULL, 7, NULL, NULL),
+(8, 1, 'Wechat', '/public/assets/images/socials/wechat.png', NULL, 8, NULL, NULL),
+(9, 1, 'Whatapp', '/public/assets/images/socials/whats-app.png', 'https://wa.me/', 9, NULL, NULL),
+(10, 1, 'Tiktok', '/public/assets/images/socials/tik-tok.png', NULL, 10, NULL, NULL),
+(11, 1, 'Youtube', '/public/assets/images/socials/youtube.png', NULL, 11, NULL, NULL),
+(12, 1, 'Tinder', '/public/assets/images/socials/tinder.png', NULL, 12, NULL, NULL),
+(13, 1, 'Momo', '/public/assets/images/socials/momo.png', 'https://nhantien.momo.vn/', 13, NULL, NULL),
+(14, 1, 'Zalopay', '/public/assets/images/socials/zalopay.png', NULL, 14, NULL, NULL),
+(15, 1, 'Zalo', '/public/assets/images/socials/zalo.png', 'https://zalo.me/', 15, NULL, NULL),
+(16, 1, 'Viber', '/public/assets/images/socials/viber.png', 'viber://add?number=', 16, NULL, NULL),
+(17, 1, 'Skype', '/public/assets/images/socials/skype.png', NULL, 17, NULL, NULL),
+(18, 1, 'Shopee', '/public/assets/images/socials/shopee.png', NULL, 18, NULL, NULL),
+(19, 1, 'Lazada', '/public/assets/images/socials/lazada.png', NULL, 19, NULL, NULL),
+(20, 1, 'Spotify', '/public/assets/images/socials/spotify.png', NULL, 20, NULL, NULL),
+(21, 1, 'Snapchat', '/public/assets/images/socials/snapchat.png', NULL, 21, NULL, NULL),
+(22, 1, 'Telegram', '/public/assets/images/socials/telegram.png', 'https://t.me/', 22, NULL, NULL),
+(23, 2, 'Đường link khác', '/public/assets/images/socials/link.png', NULL, 23, NULL, NULL),
+(24, 3, 'Tài khoản ngân hàng', '/public/assets/images/socials/bank.png', NULL, 24, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -167,7 +208,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `code_card`, `slug`, `fullname`, `email`, `avatar`, `description`, `email_verified_at`, `password`, `status`, `publish`, `roles`, `token_get_password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin1676796528', '1676796528', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, '$2y$10$HfQ0hJYhV78JJrCcfVGhPu9/vpOU45OfuLAFDTtTaTkhPKuBqKCP.', 1, 1, 2, NULL, NULL, '2023-02-19 08:48:48', '2023-02-19 08:48:48');
+(1, 'admin1677048731', '1677048731', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, '$2y$10$C/Rjw/IHShZjv6khvQa55eCqGLwMlT.BtoEIYa3BrIuhDdoPWpz9G', 1, 1, 2, NULL, NULL, '2023-02-22 06:52:11', '2023-02-22 06:52:11');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -198,6 +239,13 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Chỉ mục cho bảng `personalize`
+--
+ALTER TABLE `personalize`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `personalize_user_id_foreign` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `personal_access_tokens`
@@ -242,7 +290,13 @@ ALTER TABLE `links`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT cho bảng `personalize`
+--
+ALTER TABLE `personalize`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -254,7 +308,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT cho bảng `social_network`
 --
 ALTER TABLE `social_network`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -271,6 +325,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `links`
   ADD CONSTRAINT `links_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `personalize`
+--
+ALTER TABLE `personalize`
+  ADD CONSTRAINT `personalize_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

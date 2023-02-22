@@ -35,7 +35,8 @@ class UserController extends Controller
         $data['roles'] = UserRole::Customer;
         $data['password'] = bcrypt($data['password']);
 
-        $this->model->create($data);
+        $this->model->create($data)->personalize()->create();
+
         return back()->with('success', __('Tạo thành công'));
     }
 

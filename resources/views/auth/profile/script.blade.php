@@ -33,7 +33,7 @@ $(document).ready(function(){
 });
 
 $('.copy-text').click(function() {
-    var text = $('.link-brower').text();
+    var text = $($(this).data('target')).text();
     copyText(text);
     $(this).find('span').text('Đã copy');
 });
