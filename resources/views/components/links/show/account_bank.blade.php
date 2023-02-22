@@ -3,10 +3,12 @@
         'class' => 'social-item hvr-bob collapse-item-link',
         'href' => '#collapseText'.$link->id,
         ]) }}>
-        <div class="social-logo text-center">
+        <div class="social-logo text-center" style="opacity: 0">
             <img src="{{ asset($link->socialNetwork->logo) }}" alt="">
         </div>
-        <div class="social-name">{{ $link->plain_value['bank_name'] }}</div>
+        <div class="social-name">
+            <img src="{{ asset($link->plain_value['bank']['logo']) }}" alt="">
+        </div>
         <div class="icon-arrow text-center">
             <img src="{{ asset('/public/assets/icons/share.svg') }}" alt="">
         </div>

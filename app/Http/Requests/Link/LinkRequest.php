@@ -29,7 +29,7 @@ class LinkRequest extends Request
             $this->validate['plain_value.url'] = ['required', 'url'];
             $this->validate['plain_value.icon_url'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'];
         }elseif($this->input('type_social_network_id') == SocialNetWorkType::AccountBank){
-            $this->validate['plain_value.bank_name'] = ['required', 'string'];
+            $this->validate['plain_value.bank_id'] = ['required', 'exists:App\Models\Bank,id'];
             $this->validate['plain_value.account_name'] = ['required', 'string'];
             $this->validate['plain_value.account_number'] = ['required', 'string'];
         }
@@ -55,7 +55,7 @@ class LinkRequest extends Request
                 $this->validate['plain_value.url'] = ['required', 'url'];
                 $this->validate['plain_value.icon_url'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'];
             }elseif($this->input('type_social_network_id') == SocialNetWorkType::AccountBank){
-                $this->validate['plain_value.bank_name'] = ['required', 'string'];
+                $this->validate['plain_value.bank_id'] = ['required', 'exists:App\Models\Bank,id'];
                 $this->validate['plain_value.account_name'] = ['required', 'string'];
                 $this->validate['plain_value.account_number'] = ['required', 'string'];
             }

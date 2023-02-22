@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Link;
 
+use App\Enums\SocialNetWorkType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Link\LinkRequest;
-use App\Models\{SocialNetwork, Link};
+use App\Models\{SocialNetwork, Link, Bank};
 use App\Services\UploadImageService;
 
 class LinkController extends Controller
@@ -13,11 +14,13 @@ class LinkController extends Controller
 
     public $model;
     public $modelSocialNetwork;
+    public $modelBank;
     public function __construct(UploadImageService $service)
     {
         parent::__construct();
         $this->model = new Link;
         $this->modelSocialNetwork = new SocialNetwork;
+        $this->modelBank = new Bank;
         $this->service = $service;
     }
 
@@ -51,7 +54,11 @@ class LinkController extends Controller
             ->uploadAvatar($request->file('plain_value.icon_url'))
             ->getInstance();
         }
-        unset($data['type_social_network_id']);
+        if($data['type_social_network_id'] == SocialNetWorkType::AccountBank){
+            $data['plain_value']['bank'] = $this->modelBank->find($data['plain_value']['bank_id'])->toArray();
+        }
+
+        unset($data['type_social_network_id'], $data['plain_value']['bank_id']);
         $link = $this->model->create($data)->load(['socialNetwork']);
         return view($this->view['link'], compact('link'))->render();
 
@@ -71,7 +78,13 @@ class LinkController extends Controller
             ->deleleFile($link->plain_value['icon_url'] ?? '')
             ->getInstance();
         }
-        unset($data['type_social_network_id']);
+        
+        if($data['type_social_network_id'] == SocialNetWorkType::AccountBank){
+            $data['plain_value']['bank'] = $this->modelBank->find($data['plain_value']['bank_id'])->toArray();
+        }
+
+        unset($data['type_social_network_id'], $data['plain_value']['bank_id']);
+
         $link->update($data);
         $link = $link->load(['socialNetwork']);
 

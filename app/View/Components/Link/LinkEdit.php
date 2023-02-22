@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Link;
 
+use App\Enums\SocialNetWorkType;
 use Illuminate\View\Component;
 use App\Models\Link;
 
