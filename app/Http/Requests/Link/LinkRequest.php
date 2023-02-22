@@ -8,7 +8,6 @@ use BenSampo\Enum\Rules\EnumValue;
 
 class LinkRequest extends Request
 {
-    protected $validate = [];
     /**
      * Get the validation rules that apply to the request.
      *
@@ -18,6 +17,8 @@ class LinkRequest extends Request
     {
         $this->validate['social_network_id'] = ['required', 'exists:App\Models\SocialNetwork,id'];
         $this->validate['type_social_network_id'] = ['required', new EnumValue(SocialNetWorkType::class, false)];
+        $this->validate['plain_value.background_color'] = ['required', 'string'];
+        $this->validate['plain_value.text_color'] = ['required', 'string'];
 
         if($this->input('type_social_network_id') == SocialNetWorkType::Simple){
             $this->validate['plain_value.value_any'] = ['required'];
@@ -44,6 +45,8 @@ class LinkRequest extends Request
             $this->validate['id'] = ['required', 'exists:App\Models\Link,id'];
             $this->validate['social_network_id'] = ['required', 'exists:App\Models\SocialNetwork,id'];
             $this->validate['type_social_network_id'] = ['required', new EnumValue(SocialNetWorkType::class, false)];
+            $this->validate['plain_value.background_color'] = ['required', 'string'];
+            $this->validate['plain_value.text_color'] = ['required', 'string'];
 
             if($this->input('type_social_network_id') == SocialNetWorkType::Simple){
                 $this->validate['plain_value.value_any'] = ['required'];

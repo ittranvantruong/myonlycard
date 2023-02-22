@@ -1,6 +1,7 @@
 /* info card */
 
 .social-wrap{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,6 +18,7 @@
     height: 190px;
 }
 .social-item{
+    height: 90px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -42,13 +44,20 @@ a.social-item:hover{
 }
 
 .social-item .social-logo{
-    background-color: #f6f6f6;
-    border-radius: 50%;
+    
 }
 .social-item .social-logo img{
+    width: 60px;
+    height: 60px;
     padding: 10px;
+    background-color: #f6f6f6;
+    border-radius: 50%;
+    object-fit: contain;
 }
-
+.logo-bank{
+    width: 135px;
+    height: auto;
+}
 /* drop menu */
 .custom-dropup-menu-arrow.dropdown-menu-arrow:before{
     top: unset;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 22, 2023 lúc 07:52 AM
--- Phiên bản máy phục vụ: 10.4.14-MariaDB
--- Phiên bản PHP: 7.4.10
+-- Thời gian đã tạo: Th2 22, 2023 lúc 02:06 PM
+-- Phiên bản máy phục vụ: 10.4.24-MariaDB
+-- Phiên bản PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,44 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `myonlycard`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `banks`
+--
+
+CREATE TABLE `banks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abbreviation_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `banks`
+--
+
+INSERT INTO `banks` (`id`, `name`, `abbreviation_name`, `logo`, `position`, `created_at`, `updated_at`) VALUES
+(1, 'Ngân hàng TMCP Ngoại Thương', 'VCB', '/public/assets/images/bank/vietcombank.png', 1, NULL, NULL),
+(2, 'Ngân hàng công thương Việt Nam', 'Vietinbank', '/public/assets/images/bank/vietinbank.png', 2, NULL, NULL),
+(3, 'Ngân hàng Kỹ thương Việt Nam', 'TCB', '/public/assets/images/bank/techcombank.png', 3, NULL, NULL),
+(4, 'Ngân hàng Tiên Phong', 'Tpbank', '/public/assets/images/bank/tpbank.png', 4, NULL, NULL),
+(5, 'Ngân hàng An Bình', 'Abbank', '/public/assets/images/bank/abbank.png', 5, NULL, NULL),
+(6, 'Ngân hàng Á Châu', 'ACB', '/public/assets/images/bank/acb.png', 6, NULL, NULL),
+(7, 'Ngân hàng đầu tư và phát triển Việt Nam', 'BIDV', '/public/assets/images/bank/bidv.png', 7, NULL, NULL),
+(8, 'Ngân hàng xuất nhập khẩu Việt Nam', 'Eximbank', '/public/assets/images/bank/eximbank.png', 8, NULL, NULL),
+(9, 'Ngân hàng phát triển TP HCM', 'HDBank', '/public/assets/images/bank/hdbank.png', 9, NULL, NULL),
+(10, 'Ngân hàng quân đội', 'MB', '/public/assets/images/bank/mbbank.png', 10, NULL, NULL),
+(11, 'Ngân hàng hàng hải Việt Nam', 'MSB', '/public/assets/images/bank/msb.png', 11, NULL, NULL),
+(12, 'Ngân hàng Phương Đông', 'OCB', '/public/assets/images/bank/ocb.png', 12, NULL, NULL),
+(13, 'Ngân hàng Sài Gòn Thương Tín', 'Sacombank', '/public/assets/images/bank/sacombank.png', 13, NULL, NULL),
+(14, 'Ngân hàng Sài Gòn - Hà Nội', 'SHB', '/public/assets/images/bank/shb.png', 14, NULL, NULL),
+(15, 'Ngân hàng quốc tế', 'VIB', '/public/assets/images/bank/vib.png', 15, NULL, NULL),
+(16, 'Ngân hàng TMCP Việt Nam thịnh vượng', 'VPBank', '/public/assets/images/bank/vpbank.png', 16, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -76,7 +114,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2023_02_17_025447_create_social_network_table', 1),
 (6, '2023_02_18_180616_create_links_table', 1),
-(7, '2023_02_20_221048_create_personalize_table', 1);
+(7, '2023_02_20_221048_create_personalize_table', 1),
+(8, '2023_02_22_154831_create_banks_table', 1);
 
 -- --------------------------------------------------------
 
@@ -208,11 +247,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `code_card`, `slug`, `fullname`, `email`, `avatar`, `description`, `email_verified_at`, `password`, `status`, `publish`, `roles`, `token_get_password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin1677048731', '1677048731', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, '$2y$10$C/Rjw/IHShZjv6khvQa55eCqGLwMlT.BtoEIYa3BrIuhDdoPWpz9G', 1, 1, 2, NULL, NULL, '2023-02-22 06:52:11', '2023-02-22 06:52:11');
+(1, 'admin1677071190', '1677071190', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, '$2y$10$k2/1/5vI2rLqJdMVYVgtceTH8cbO7sAPNaKN40mZU9YeiSZHWzv1.', 1, 1, 2, NULL, NULL, '2023-02-22 13:06:30', '2023-02-22 13:06:30');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `banks`
+--
+ALTER TABLE `banks`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `failed_jobs`
@@ -275,6 +320,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `banks`
+--
+ALTER TABLE `banks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT cho bảng `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -290,7 +341,7 @@ ALTER TABLE `links`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `personalize`

@@ -1,3 +1,11 @@
+<style>
+.ts-control .avatar{
+    background-position: center;
+    background-size: contain;
+    width: 80px;
+    background-color: transparent;
+}
+</style>
 <x-input type="hidden" name="type_social_network_id" :value="$socialNetwork->type" />
 <div class="mb-3">
     <label class="form-label">{{ __('Chọn ngân hàng') }}</label>
@@ -19,4 +27,5 @@
     <label class="form-label">{{ __('Số tài khoản') }}</label>
     <x-input name="plain_value[account_number]" :value="$link->plain_value['account_number'] ?? ''" :required="true" :placeholder="__('Vui lòng nhập số tài khoản')"/>
 </div>
-{{-- <script>beautySelectImage("selectBank")</script> --}}
+
+<script>beautySelectImage("selectBank")</script>

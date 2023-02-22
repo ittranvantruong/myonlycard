@@ -18,6 +18,10 @@
         <div id="inputRender">
             @include('links.form.'.\Str::snake($socialNetwork[0]->type->key), ['socialNetwork' => $socialNetwork[0]])
         </div>
+        @include('links.form.color', [
+            'background_color' => '#FFFFFF',
+            'text_color' => '#000000',
+        ])
     </div>
     <div class="modal-footer">
         <button type="button" class="btn me-auto" data-bs-dismiss="modal">{{ __('Đóng') }}</button>
