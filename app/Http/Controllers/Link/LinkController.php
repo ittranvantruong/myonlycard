@@ -13,8 +13,13 @@ class LinkController extends Controller
     //
 
     public $model;
+
     public $modelSocialNetwork;
+
     public $modelBank;
+
+    private $data;
+
     public function __construct(UploadImageService $service)
     {
         parent::__construct();
@@ -46,46 +51,31 @@ class LinkController extends Controller
         return view($this->view['edit'], compact('link', 'socialNetwork'))->render();
     }
     public function store(LinkRequest $request){
-        $data = $request->validated();
-        $data['user_id'] = auth()->user()->id;
-        $data['position'] = 0;
-        if ($request->hasFile('plain_value.icon_url')) {
-            $data['plain_value']['icon_url'] = $this->service
-            ->uploadAvatar($request->file('plain_value.icon_url'))
-            ->getInstance();
-        }
-        if($data['type_social_network_id'] == SocialNetWorkType::AccountBank){
-            $data['plain_value']['bank'] = $this->modelBank->find($data['plain_value']['bank_id'])->toArray();
-        }
 
-        unset($data['type_social_network_id'], $data['plain_value']['bank_id']);
-        $link = $this->model->create($data)->load(['socialNetwork']);
+        $this->data = $request->validated();
+        $this->data['user_id'] = auth()->user()->id;
+        $this->data['position'] = 0;
+
+        $this->handleSameCreateAndUpdate($request);
+
+        $link = $this->model->create($this->data)->load(['socialNetwork']);
         return view($this->view['link'], compact('link'))->render();
 
     }
 
     public function update(LinkRequest $request){
 
-        $data = $request->validated();
+        $this->data = $request->validated();
         
-        $link = $this->model->find($data['id']);
+        $link = $this->model->find($this->data['id']);
         
         $this->authorize('update', $link);
 
-        if ($request->hasFile('plain_value.icon_url')) {
-            $data['plain_value']['icon_url'] = $this->service
-            ->uploadAvatar($request->file('plain_value.icon_url'))
-            ->deleleFile($link->plain_value['icon_url'] ?? '')
-            ->getInstance();
-        }
-        
-        if($data['type_social_network_id'] == SocialNetWorkType::AccountBank){
-            $data['plain_value']['bank'] = $this->modelBank->find($data['plain_value']['bank_id'])->toArray();
-        }
+        $this->handleSameCreateAndUpdate($request);
 
-        unset($data['type_social_network_id'], $data['plain_value']['bank_id']);
+        $this->service->deleleFile($link->plain_value['icon_url'] ?? '');
 
-        $link->update($data);
+        $link->update($this->data);
         $link = $link->load(['socialNetwork']);
 
         return view($this->view['link'], compact('link'))->render();
@@ -100,7 +90,37 @@ class LinkController extends Controller
 
     public function delete($id){
         $link = $this->model->findOrFail($id);
+
         $this->authorize('delete', $link);
+
+        if($link->plain_value['icon_url']){
+            $this->service->deleleFile($link->plain_value['icon_url']);
+        }
+
         return $link->delete();
     }
+
+    private function handleSameCreateAndUpdate($request){
+        if($this->data['type_social_network_id'] == SocialNetWorkType::Custom){
+            if ($request->hasFile('plain_value.icon_url')) {
+
+                $this->data['plain_value']['icon_url'] = $this->service
+                ->uploadAvatar($request->file('plain_value.icon_url'))
+                ->getInstance();
+
+            }
+        }elseif($this->data['type_social_network_id'] == SocialNetWorkType::AccountBank){
+            $this->handleHasBank();
+        }
+        $this->handleItemUnnecessary();
+    }
+
+    private function handleHasBank(){
+        $this->data['plain_value']['bank'] = $this->modelBank->find($this->data['plain_value']['bank_id'])->toArray();
+    }
+
+    private function handleItemUnnecessary(){
+        unset($this->data['type_social_network_id'], $this->data['plain_value']['bank_id']);
+    }
+
 }
