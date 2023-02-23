@@ -11,6 +11,8 @@
     width: 190px;
     height: 190px;
     margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
 }
 .wrap-avatar img{
     object-fit: cover;
@@ -43,9 +45,9 @@ a.social-item:hover{
     text-decoration: none;
 }
 
-.social-item .social-logo{
+/* .social-item .social-logo{
     
-}
+} */
 .social-item .social-logo img{
     width: 60px;
     height: 60px;
@@ -63,12 +65,6 @@ a.social-item:hover{
     top: unset;
     bottom: -0.25rem;
     transform: rotate(225deg);
-}
-.dropdown-item.edit img{
-
-}
-.dropdown-item.delete img{
-    
 }
 /* pesonalize */
 .bg-personalize{
