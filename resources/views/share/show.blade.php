@@ -22,5 +22,6 @@
                 </div>
             </div>
         </div>
+        @include('partials.footer-logo')
     </div>
 </x-layouts.guest.master>
