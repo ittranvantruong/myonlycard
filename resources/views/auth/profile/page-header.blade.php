@@ -4,7 +4,7 @@
             <div class="col-12 d-flex justify-content-center justify-content-lg-start align-items-center gap-2">
                 <div class="mylink fw-bold d-none d-sm-block">
                     <span class="link-title">{{ __('Link của bạn') }}: </span>
-                    <span class="link-brower text-primary">{{ route('share.show', $auth->slug) }}</span>
+                    <span class="link-brower text-primary">{{ route('share.show', $auth->code_card) }}</span>
                 </div>
                 <div class="">
                     <button type="button" class="btn btn-sm copy-text btn-outline-secondary" data-target=".link-brower">
@@ -17,7 +17,7 @@
                     </button>
                 </div>
                 <div class="">
-                    <a href="{{ route('share.show', $auth->slug) }}" target="_blank" class="btn btn-sm btn-primary">
+                    <a href="{{ route('share.show', $auth->code_card) }}" target="_blank" class="btn btn-sm btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>

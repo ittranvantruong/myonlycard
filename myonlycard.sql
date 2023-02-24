@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 22, 2023 lúc 02:06 PM
--- Phiên bản máy phục vụ: 10.4.24-MariaDB
--- Phiên bản PHP: 8.1.6
+-- Thời gian đã tạo: Th2 24, 2023 lúc 09:33 AM
+-- Phiên bản máy phục vụ: 10.4.14-MariaDB
+-- Phiên bản PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -247,7 +247,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `code_card`, `slug`, `fullname`, `email`, `avatar`, `description`, `email_verified_at`, `password`, `status`, `publish`, `roles`, `token_get_password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin1677071190', '1677071190', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, '$2y$10$k2/1/5vI2rLqJdMVYVgtceTH8cbO7sAPNaKN40mZU9YeiSZHWzv1.', 1, 1, 2, NULL, NULL, '2023-02-22 13:06:30', '2023-02-22 13:06:30');
+(1, 'admin1677227562', '1677227562', 'Admin', 'admin@gmail.com', NULL, NULL, NULL, '$2y$10$M/JUyAIn236EIK7jJXMzJueNxKPIAPm7byDzZq4oEVHGROZriehk6', 1, 1, 2, NULL, NULL, '2023-02-24 08:32:42', '2023-02-24 08:32:42');
 
 --
 -- Chỉ mục cho các bảng đã đổ

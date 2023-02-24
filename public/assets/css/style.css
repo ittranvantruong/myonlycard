@@ -142,5 +142,6 @@ a.social-item:hover{
 /* footer */
 .footer-logo{
     margin: auto 0 0 0;
+    padding-top: 30px;
     padding-bottom: 30px;
 }

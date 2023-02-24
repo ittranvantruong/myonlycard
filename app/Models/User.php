@@ -80,7 +80,7 @@ class User extends Authenticatable
     }
 
     public static function share($slug){
-        return static::where('slug', $slug)
+        return static::where('code_card', $slug)
         ->where('publish', true)
         ->with(['links.socialNetwork', 'personalize'])
         ->firstOrFail();
