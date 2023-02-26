@@ -3,6 +3,9 @@
 <x-layouts.guest.master>
     <div class="page page-center">
         <div class="container-tight py-4">
+            <div class="text-center mb-4">
+                <img src="{{ asset(config('custom.images.logo')) }}" width="200" alt="">
+            </div>
             <x-form :action="route('password.forgot.update')" class="card card-md" type="put" :validate="true">
                 <x-input type="hidden" name="token" :value="$token" />
                 <div class="card-body">

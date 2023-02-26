@@ -32,4 +32,5 @@
         </div>
         @include('partials.footer-logo')
     </div>
+    @include('qrcode.modal', ['user' => $auth])
 </x-layouts.master>

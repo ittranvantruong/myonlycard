@@ -1,3 +1,5 @@
+<!-- Tabler Core -->
+<script src="{{ asset('public/lib/Tabler/dist/js/tabler.min.js') }}"></script>
 <script src="{{ asset('public/lib/jquery/jquery.min.js') }}"></script>
 
 <script src="{{ asset('public/lib/jquery-toast-plugin/jquery.toast.min.js') }}"></script>

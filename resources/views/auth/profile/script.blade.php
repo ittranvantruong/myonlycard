@@ -32,12 +32,6 @@ $(document).ready(function(){
     });
 });
 
-$('.copy-text').click(function() {
-    var text = $($(this).data('target')).text();
-    copyText(text);
-    $(this).find('span').text('Đã copy');
-});
-
 // render input của từng loại link
 
 $(document).on('change', '#selectTypeLink', function(e){

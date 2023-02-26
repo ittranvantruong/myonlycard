@@ -91,6 +91,7 @@
             </div>
         </div>
     </div>
-    @include('auth.profile.modals.modal')
+    @include('modals.modal')
+    @include('qrcode.modal', ['user' => $auth])
 </x-layouts.master>
 

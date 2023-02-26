@@ -89,6 +89,20 @@ function copyText(text){
     input.remove();
 }
 
+function createQRcode(link, elm){
+    const qrCode = new QRCodeStyling({
+        width: 200,
+        height: 200,
+        type: "png",
+        data: link
+    });
+    qrCode.append(document.getElementById(elm));
+    return qrCode;
+}
+function downloadQRcode(qrCode){
+    qrCode.download({ name: "qrcode-tcasevn", extension: "png" });
+}
+
 $(document).on('click', '.collapse-item-link', function(e) {
     e.preventDefault();
     var element = $(this).attr('href');
@@ -101,4 +115,9 @@ $(document).on('click', '.collapse-item-link', function(e) {
       } else {
         $(element).removeClass("flipOutX d-none").addClass("flipInX");
       }
+});
+$('.copy-text').click(function() {
+    var text = $($(this).data('target')).text();
+    copyText(text);
+    $(this).find('span').text('Đã copy');
 });

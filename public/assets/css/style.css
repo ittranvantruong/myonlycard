@@ -12,16 +12,27 @@
     gap: 20px;
 }
 .wrap-avatar{
+    position: relative;
     width: 190px;
     height: 190px;
     margin: 0 auto;
     border-radius: 50%;
-    overflow: hidden;
 }
 .wrap-avatar img{
     object-fit: cover;
     width: 190px;
     height: 190px;
+    border-radius: 50%;
+}
+.icon-share{
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    padding: 4px;
+
 }
 .social-item{
     height: 90px;

@@ -4,7 +4,7 @@
     <div class="page page-center">
         <div class="container-tight py-4">
             <div class="text-center mb-4">
-                <h1>{{ config('custom.site_name') }}</h1>
+                <img src="{{ asset(config('custom.images.logo')) }}" width="200" alt="">
             </div>
             <x-form :action="route('login.post')" class="card card-md" type="post" :validate="true">
                 <div class="card-body">

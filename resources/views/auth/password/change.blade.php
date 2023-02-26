@@ -3,6 +3,9 @@
 <x-layouts.master>
     <div class="page page-center">
         <div class="container-tight py-4">
+            <div class="text-center mb-4">
+                <img src="{{ asset(config('custom.images.logo')) }}" width="200" alt="">
+            </div>
             <x-form :action="route('password.change.update')" class="card card-md" type="put" :validate="true">
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">{{ __('Đổi mật khẩu') }}</h2>
