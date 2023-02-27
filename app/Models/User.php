@@ -82,10 +82,19 @@ class User extends Authenticatable
     public static function share($slug){
         return static::where('code_card', $slug)
         ->where('publish', true)
-        ->with(['links.socialNetwork', 'personalize'])
+        ->withAllRelations()
         ->firstOrFail();
     }
     public function personalize(){
         return $this->hasOne(Personalize::class, 'user_id');
+    }
+    public function scopeWithAllRelations($query){
+        return $query->with([
+            'links' => function($query){
+                $query->with('socialNetwork');
+                $query->orderBy('position', 'ASC');
+            },
+            'personalize'
+        ]);
     }
 }

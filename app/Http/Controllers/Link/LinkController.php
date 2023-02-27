@@ -93,9 +93,7 @@ class LinkController extends Controller
 
         $this->authorize('delete', $link);
 
-        if($link->plain_value['icon_url']){
-            $this->service->deleleFile($link->plain_value['icon_url']);
-        }
+        $this->service->deleleFile($link->plain_value['icon_url'] ?? '');
 
         return $link->delete();
     }

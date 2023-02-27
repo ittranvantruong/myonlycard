@@ -1,6 +1,7 @@
 @section('title', __('Chỉnh sửa trang'))
 @push('css')
 <link rel="stylesheet" href="{{ asset('public/lib/jquery-ui/jquery-ui.css') }}"> 
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <style>
     .form-avatar{
         position: relative;
@@ -59,13 +60,37 @@
         bottom: 5px;
         cursor: pointer;
     }
+    .ts-wrapper .ts-control{
+        min-height: calc(1.4285714em + 0.875rem + 2px);
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        display: flex;
+        align-items: center;
+        padding: 0.4375rem 0.75rem;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        box-sizing: border-box;
+        box-shadow: none;
+        border-radius: 4px;
+        flex-wrap: wrap;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: 1.4285714;
+    }
+    .ts-wrapper .dropdown-menu{
+        width: 100%;
+        height: auto;
+    }
 </style>
 @endpush
 @push('js-lib')
-<script src="{{ asset('public/lib/Tabler/lib/tom-select/dist/js/tom-select.base.min.js') }}"></script>
+{{-- <script src="{{ asset('public/lib/Tabler/lib/tom-select/dist/js/tom-select.base.min.js') }}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 @endpush
 @push('js')
 <script src="{{ asset('public/lib/jquery-ui/jquery-ui.js') }}"></script>
+<script src="{{ asset('public/lib/jquery-ui/jquery.ui.touch-punch.min.js') }}"></script>
     @include('auth.profile.script')
 @endpush
 
@@ -80,7 +105,7 @@
                     </div>
                     <div id="viewDemoProfile" class="col col-sm-12 col-md-6 d-none d-sm-block">
                         <div class="row justify-content-center">
-                            <div class="col-8">
+                            <div class="col-10">
                                 <div class="preview-profile">
                                     @include('auth.profile.block-right', ['auth' => $auth])
                                 </div>
