@@ -13,6 +13,8 @@ use App\Enums\UserStatus;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    const ACTIVE = 1;
+    const NO_ACTIVE = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -81,6 +83,7 @@ class User extends Authenticatable
 
     public static function share($slug){
         return static::where('code_card', $slug)
+        ->where('status', self::ACTIVE)
         ->where('publish', true)
         ->withAllRelations()
         ->firstOrFail();
