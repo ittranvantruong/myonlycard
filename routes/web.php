@@ -84,6 +84,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/edit', 'edit')->name('edit');
         Route::get('/show', 'show')->name('show');
         Route::put('/update', 'update')->name('update');
+        Route::delete('/delete', 'delete')->name('delete');
     });
     // auth 
     Route::prefix('/password')

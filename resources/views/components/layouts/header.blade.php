@@ -20,6 +20,7 @@
                 @endif
                 <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('Chỉnh thông tin') }}</a>
                 <a href="{{ route('password.change.index') }}" class="dropdown-item">{{ __('Đổi mật khẩu') }}</a>
+                <a id="deleteAccount" href="#" class="dropdown-item">{{ __('Xóa tài khoản') }}</a>
                 <a href="{{ route('logout') }}" class="dropdown-item">{{ __('Đăng xuất') }}</a>
               </div>
             </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ProfileRequest;
 use App\Models\User;
 use App\Services\UploadImageService;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -47,5 +48,12 @@ class ProfileController extends Controller
         }
         $auth->update($data);
         return back()->with('success', __('Cập nhật thành công.'));
+    }
+
+    public function delete(Request $request){
+        $user = auth()->user();
+        $logout = (new LogoutController)->logout($request);
+        $user->delete();
+        return $logout;
     }
 }
