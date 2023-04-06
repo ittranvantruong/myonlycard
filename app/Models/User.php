@@ -80,6 +80,9 @@ class User extends Authenticatable
     public static function findByKey($key, $value){
         return static::where($key, $value)->first();
     }
+    public function isActive(){
+        return $this->status == UserStatus::Active();
+    }
 
     public static function share($slug){
         return static::where('code_card', $slug)

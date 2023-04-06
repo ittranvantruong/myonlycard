@@ -20,9 +20,16 @@ class UserController extends Controller
     public function getView()
     {
         return [
+            'index' => 'user.index',
             'create' => 'user.create'
         ];
     }
+
+    public function index(){
+        $users = $this->model->orderBy('id', 'desc')->get();
+        return view($this->view['index'], compact('users'));
+    }
+
     public function create(){
         return view($this->view['create']);
     }
@@ -39,5 +46,8 @@ class UserController extends Controller
 
         return back()->with('success', __('Tạo thành công'));
     }
-
+    public function delete($id){
+        $this->model->whereId($id)->delete();
+        return back()->with('success', __('Thực hiện thành công'));
+    }
 }

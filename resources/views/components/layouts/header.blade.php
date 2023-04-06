@@ -17,10 +17,10 @@
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 @if(auth()->user()->isUserManager())
                   <a href="{{ route('user.create') }}" class="dropdown-item">{{ __('Tạo mã sản phẩm') }}</a>
+                  <a href="{{ route('user.index') }}" class="dropdown-item">{{ __('Danh sách thành viên') }}</a>
                 @endif
                 <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('Chỉnh thông tin') }}</a>
                 <a href="{{ route('password.change.index') }}" class="dropdown-item">{{ __('Đổi mật khẩu') }}</a>
-                <a id="deleteAccount" href="#" class="dropdown-item">{{ __('Xóa tài khoản') }}</a>
                 <a href="{{ route('logout') }}" class="dropdown-item">{{ __('Đăng xuất') }}</a>
               </div>
             </div>

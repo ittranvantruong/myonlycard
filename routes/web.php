@@ -84,7 +84,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/edit', 'edit')->name('edit');
         Route::get('/show', 'show')->name('show');
         Route::put('/update', 'update')->name('update');
-        Route::delete('/delete', 'delete')->name('delete');
+        // Route::delete('/delete', 'delete')->name('delete');
     });
     // auth 
     Route::prefix('/password')
@@ -107,7 +107,9 @@ Route::middleware(['auth'])->group(function(){
     ->prefix('/user')
     ->as('user.')
     ->group(function(){
+        Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
+        Route::delete('/delete/{id}', 'delete')->name('delete');
     });
 });

@@ -11,7 +11,7 @@
         {{ $slot }}
         <x-layouts.footer />
     </div>
-    <x-form id="formDeleteAccount" :action="route('profile.delete')" type="delete" />
+    {{-- <x-form id="formDeleteAccount" :action="route('profile.delete')" type="delete" /> --}}
     <x-layouts.scripts />
     <x-alert />
 </body>
